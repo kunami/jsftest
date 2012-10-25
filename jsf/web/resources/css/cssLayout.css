@@ -1,3 +1,28 @@
+html, body {
+    height: 99.9%;
+    overflow: hidden;
+}
+body {
+    margin: 0px;
+    padding: 0px;
+}
+#page-container {
+    min-height: 100%;
+    margin-bottom: -25px;
+}
+* html #page-container {
+    height: 100%;
+}
+#page-footer {
+    padding: 0px 3px;
+    z-index: 10000;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+#page-footer td {
+    font-size: 10px;
+    font-family: Verdana;
+}
 
 #top {
     position: relative;
@@ -11,7 +36,6 @@
     position: relative;
     background-color: #c2dfef;
     padding: 5px;
-    margin: 10px 0px 0px 0px;
 }
 
 #left {
@@ -58,4 +82,14 @@
   text-decoration : underline;
 }
 
+.left {
+    float: left;
+}
 
+.right {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}

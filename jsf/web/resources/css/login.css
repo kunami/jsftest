@@ -1,0 +1,12 @@
+#login-container {
+    width: 300px;
+}
+#login-container > div .label {
+    width: 100px;
+    float: left;
+    padding-top: 3px;
+}
+
+#login-container > div .value {
+    float: left;
+}

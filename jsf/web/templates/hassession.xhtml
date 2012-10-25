@@ -23,7 +23,7 @@
                         <h4>JSF Testing with PrimeFaces!</h4>
                     </div>
                     <div class="right">
-                        
+                        Welcome ${userBean.user.firstName} #{userBean.user.lastName}!
                     </div>
                     <div class="clear" />
                 </ui:insert>
@@ -33,6 +33,7 @@
                     <ui:insert name="content">Content</ui:insert>
                 </div>
             </div>
+            <br/>
         </div>
         <div id="page-footer">
             <div id="bottom">

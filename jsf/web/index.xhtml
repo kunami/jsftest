@@ -2,17 +2,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:body>
         <ui:composition template="./templates/nosession.xhtml">
+            <ui:define name="title">Login</ui:define>
+            <ui:define name="head">
+                <link href="./resources/css/login.css" rel="stylesheet" type="text/css" />
+            </ui:define>
             <ui:define name="content">
-                My Content!<br/>
-                Hello from Facelets
-                <br />
-                <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+                <h3>Please login below:</h3>
+                <h:form id="login">
+                    <div id="login-container">
+                        <h:inputHidden id="hidden" />
+                        <h:messages for="hidden"/><br/>
+                        <div>
+                            <div class="label"><h:outputText value="Username" /></div>
+                            <div class="value"><h:inputText id="username" value="#{loginManager.username}" label="Username">                                    
+                                    <f:validateLength minimum="3" maximum="20" />
+                                </h:inputText><h:message for="username" /></div>
+                            <div class="clear"/>
+                        </div>
+                        <div>
+                            <div class="label"><h:outputText value="Password" /></div>
+                            <div class="value"><h:inputSecret id="password" value="#{loginManager.password}" label="Password">
+                                    <f:validateLength minimum="3" maximum="20" />
+                                </h:inputSecret><h:message for="password" /></div>
+                            <div class="clear"/>
+                        </div>
+                        <div>
+<!--                            <h:inputHidden id="hidden">
+                                <f:validator validatorId="com.jsf.LoginValidator" />
+                            </h:inputHidden>-->
+                            <h:commandButton type="submit" value="Login" action="#{loginManager.login()}" />
+                        </div>
+                    </div>
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>
