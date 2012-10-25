@@ -58,4 +58,14 @@ public class LoginManager
             return "welcome";
         }
     }
+    
+    public String logout()
+    {
+        System.out.println("in logout");
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        UserBean userBean = facesContext.getApplication().evaluateExpressionGet(facesContext, "#{userBean}", UserBean.class);
+        userBean.setUser(null);
+        userBean.setLoggedIn(false);
+        return "index";
+    }
 }
