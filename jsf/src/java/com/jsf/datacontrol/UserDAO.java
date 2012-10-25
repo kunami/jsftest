@@ -24,4 +24,9 @@ public class UserDAO
     {
         return users.get(username);
     }
+
+    protected final void insertUser(User user)
+    {
+        users.put(user.getUsername(), user);
+    }
 }

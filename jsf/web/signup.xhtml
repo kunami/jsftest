@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
+        <ui:composition template="./templates/nosession.xhtml">
+            <ui:define name="title">Sign up</ui:define>
+            <ui:define name="head">
+                <link href="./resources/css/signup.css" rel="stylesheet" type="text/css" />
+            </ui:define>
+            <ui:define name="content">
+                <h3>Please fill out the details below:</h3>
+                <h:form id="signup">
+                    <div id="login-container">
+                        <h:inputHidden id="hidden" />
+                        <h:messages for="hidden"/><br/>
+                        <div>
+                            <div class="label"><h:outputText value="Username" /></div>
+                            <div class="value"><h:inputText id="username" value="#{signUpManager.username}" label="Username"  maxlength="20">
+                                    <f:validateLength minimum="3" maximum="20" />
+                                </h:inputText><h:message for="username" /></div>
+                            <div class="clear"/>
+                        </div>
+                        <div>
+                            <div class="label"><h:outputText value="Password" /></div>
+                            <div class="value"><h:inputSecret id="password" value="#{signUpManager.password}" label="Password" maxlength="20">
+                                    <f:validateLength minimum="7" maximum="20" />
+                                </h:inputSecret><h:message for="password" /></div>
+                            <div class="clear"/>
+                        </div>
+                        <div>
+                            <div class="label"><h:outputText value="Password (Confirm)" /></div>
+                            <div class="value"><h:inputSecret id="password2" value="#{signUpManager.password2}" label="Password (Confirm)" maxlength="20">
+                                    <f:validateLength minimum="7" maximum="20" />
+                                </h:inputSecret><h:message for="password2" /></div>
+                            <div class="clear"/>
+                        </div>
+                        <div>
+                            <div class="label"><h:outputText value="First Name" /></div>
+                            <div class="value"><h:inputText id="firstName" value="#{signUpManager.firstName}" label="First Name" maxlength="40">                                    
+                                    <f:validateLength minimum="3" maximum="40" />
+                                </h:inputText><h:message for="firstName" /></div>
+                            <div class="clear"/>
+                        </div>
+                        <div>
+                            <div class="label"><h:outputText value="Last Name" /></div>
+                            <div class="value"><h:inputText id="lastName" value="#{signUpManager.lastName}" label="Last Name" maxlength="40">                                    
+                                    <f:validateLength minimum="3" maximum="40" />
+                                </h:inputText><h:message for="lastName" /></div>
+                            <div class="clear"/>
+                        </div>
+                        <div>
+                            <h:commandButton type="submit" value="Go!" action="#{signUpManager.create()}" />
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

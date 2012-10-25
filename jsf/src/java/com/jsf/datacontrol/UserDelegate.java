@@ -14,4 +14,9 @@ public class UserDelegate
     {
         return dao.getUser(username);
     }
+    
+    public static void insertUser(User user)
+    {
+        dao.insertUser(user);
+    }
 }

@@ -54,7 +54,7 @@ public class LoginManager
         } else
         {//Good Login            
             userBean.setUser(user);
-            userBean.setLoggedIn(false);
+            userBean.setLoggedIn(true);
             return "welcome";
         }
     }
