@@ -19,4 +19,9 @@ public class UserDelegate
     {
         dao.insertUser(user);
     }
+    
+    public static void updateUser(User user)
+    {
+        dao.updateUser(user);
+    }
 }
