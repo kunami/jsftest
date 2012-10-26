@@ -1,12 +1,13 @@
 package com.jsf.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author ban
  */
-public class User 
+public class User implements Serializable
 {
     private String username;
     private String password;

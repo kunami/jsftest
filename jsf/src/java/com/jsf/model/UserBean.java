@@ -1,5 +1,6 @@
 package com.jsf.model;
 
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -9,7 +10,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class UserBean 
+public class UserBean implements Serializable
 {
     private User user;
     private boolean loggedIn;
