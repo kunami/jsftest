@@ -24,7 +24,7 @@
                     </div>
                     <div class="right">
                         <h:form id="logout">
-                            Welcome ${userBean.user.firstName} #{userBean.user.lastName}!&nbsp;|&nbsp;
+                            Welcome <h:commandLink action="#{signUpManager.prepareUpdate(userBean.user)}" value="#{userBean.user.firstName} #{userBean.user.lastName}" />!&nbsp;|&nbsp;
                             <h:commandLink action="#{loginManager.logout()}" value="Logout" />
                         </h:form>
                     </div>

@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
@@ -23,7 +24,34 @@ public class SignUpManager implements Serializable
     private String password2;
     private String firstName;
     private String lastName;
+    private User user;
+    
+    @ManagedProperty("#{userBean}")
+    private UserBean userBean;
 
+    public SignUpManager()
+    {
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
+        this.username = user.getUsername();
+        this.password = this.password2 = user.getPassword();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+    }
+    
+    public User getUser()
+    {
+        return user;
+    }
+    
+    public void setUserBean(UserBean userBean)
+    {
+        this.userBean = userBean;
+    }
+    
     public String getUsername()
     {
         return username;
@@ -77,14 +105,13 @@ public class SignUpManager implements Serializable
     public String create()
     {
         FacesContext context = FacesContext.getCurrentInstance();
-        //todo check the required fields are filled out (validators should handle this)
-        UserBean userBean = context.getApplication().evaluateExpressionGet(context, "#{userBean}", UserBean.class);        
-        if(isValid(context))
+        //todo check the required fields are filled out (validators should handle this)      
+        if(isValid(context, true))
         {//Good submit, create user object and add to map         
             //TODO create user object, add to map
-            User user = new User(username, password, firstName, lastName, new Date());
-            UserDelegate.insertUser(user);
-            userBean.setUser(user);
+            User newUser = new User(username, password, firstName, lastName, new Date());
+            UserDelegate.insertUser(newUser);
+            userBean.setUser(newUser);
             userBean.setLoggedIn(true);
             return "welcome";
         } else
@@ -96,17 +123,17 @@ public class SignUpManager implements Serializable
         
     }
     
-    private boolean isValid(FacesContext context)
+    private boolean isValid(FacesContext context, boolean checkExists)
     {
         //validate password == password2
         if(password.equals(password2))
         {
             //Need to check against existing users, return an error if duplicate.
-            User user = UserDelegate.getUser(username);
-            if(user == null)
+            User existing = UserDelegate.getUser(username);
+            if(existing == null || !checkExists)
             {
                 return true;
-            } else
+            } else if (checkExists)
             {
                 context.addMessage("signup:hidden", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Username already taken", "Username already taken"));
             }
@@ -115,5 +142,35 @@ public class SignUpManager implements Serializable
             context.addMessage("signup:hidden", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Passwords do not match", "Passwords do not match"));
         }
         return false;
+    }
+    
+    public String update(User original)
+    {
+        FacesContext context = FacesContext.getCurrentInstance();
+        System.out.println("in update: " + username);
+        //username = original.getUsername();
+        //todo check the required fields are filled out (validators should handle this)
+        if(isValid(context, false))
+        {//Good submit, create user object and add to map         
+            //TODO create user object, add to map
+            User updated = new User(username, password, firstName, lastName, new Date());
+            UserDelegate.updateUser(updated);
+            //For this example we are updating the exact object reference, but I am going to overwrite the userbean anyway.
+            if(updated.getUsername().equals(username))
+            {
+                userBean.setUser(updated);
+            }
+            System.out.println("returning welcome");
+            return "welcome";
+        } else
+        {
+            return "update";
+        }
+    }
+    
+    public String prepareUpdate(User user)
+    {
+        setUser(user);
+        return "update";
     }
 }
