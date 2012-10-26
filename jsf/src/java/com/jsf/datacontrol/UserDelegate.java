@@ -1,6 +1,7 @@
 package com.jsf.datacontrol;
 
 import com.jsf.model.User;
+import java.util.Map;
 
 /**
  *
@@ -18,5 +19,10 @@ public class UserDelegate
     public static void insertUser(User user)
     {
         dao.insertUser(user);
+    }
+
+    public static Map<String, User> getUsers()
+    {
+        return dao.getUsers();
     }
 }

@@ -1,16 +1,27 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<f:view xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:body>
         <ui:composition template="./templates/hassession.xhtml">
             <ui:define name="title">Welcome</ui:define>
-            <ui:define name="content">
-                <h3>Thank you for logging in!</h3>
+            <ui:define name="content"><!-- paginator="true" rows="10"--><!--selection="#{projects.selectedProject}" selectionMode="single"-->
+                <h4><h:outputText value="Users" /></h4>
+                <p:dataTable id="projectTable" var="u" value="#{users.model}"><!-- scrollable="true" scrollHeight="200" -->
+                    <p:column sortBy="#{u.username}">
+                        <f:facet name="header">Username</f:facet>
+                            #{u.username}
+                    </p:column>
+                    <p:column sortBy="#{u.lastName}">
+                        <f:facet name="header">Name</f:facet>
+                            #{u.firstName} #{u.lastName}
+                    </p:column>
+                </p:dataTable>
             </ui:define>
         </ui:composition>
     </h:body>
-</html>
+</f:view>
 
