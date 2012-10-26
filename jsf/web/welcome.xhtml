@@ -10,16 +10,22 @@
             <ui:define name="title">Welcome</ui:define>
             <ui:define name="content"><!-- paginator="true" rows="10"--><!--selection="#{projects.selectedProject}" selectionMode="single"-->
                 <h4><h:outputText value="Users" /></h4>
-                <p:dataTable id="projectTable" var="u" value="#{users.model}"><!-- scrollable="true" scrollHeight="200" -->
-                    <p:column sortBy="#{u.username}">
-                        <f:facet name="header">Username</f:facet>
-                            #{u.username}
-                    </p:column>
-                    <p:column sortBy="#{u.lastName}">
-                        <f:facet name="header">Name</f:facet>
-                            #{u.firstName} #{u.lastName}
-                    </p:column>
-                </p:dataTable>
+                <h:form id="form">
+                    <p:dataTable id="usersTable" var="u" value="#{users.model}"><!-- scrollable="true" scrollHeight="200" -->
+                        <p:column sortBy="#{u.username}">
+                            <f:facet name="header">Username</f:facet>
+                                #{u.username}
+                        </p:column>
+                        <p:column sortBy="#{u.lastName}">
+                            <f:facet name="header">Name</f:facet>
+                                #{u.firstName} #{u.lastName}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">&nbsp;</f:facet>
+                            <p:commandButton ajax="false" icon="ui-icon-search" action="#{signUpManager.prepareUpdate(u)}">Update</p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>
