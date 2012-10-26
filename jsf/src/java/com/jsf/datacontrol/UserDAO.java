@@ -29,6 +29,11 @@ public class UserDAO
     {
         users.put(user.getUsername(), user);
     }
+    
+    protected final void updateUser(User user)
+    {
+        users.put(user.getUsername(), user);
+    }
 
     protected final Map<String, User> getUsers()
     {
